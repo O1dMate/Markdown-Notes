@@ -35,13 +35,13 @@ currencyType = Vault.ObjectPropertyOperations.GetProperty(ObjVer, vault.Property
 result = (a*b) / c
 
 If (InStr(currencyType, "Australian Dollars")) Then
-  Output = "$" & Round(result, 4)
+	Output = "$" & Round(result, 4)
 ElseIf (InStr(currencyType, "Euros")) Then
-  Output = "€" & Round(result, 4)
+	Output = "€" & Round(result, 4)
 ElseIf (InStr(currencyType, "Pounds")) Then
-  Output = "£" & Round(result, 4)
+	Output = "£" & Round(result, 4)
 Else 
-  Output = "No Currency Selected"
+	Output = "No Currency Selected"
 End If
 ```
 
@@ -54,7 +54,7 @@ Dim result
 Dim currencyType
 
 Function calculations(val1, val2, val3)
-  calculations = (val1 * val2) / val3
+	calculations = (val1 * val2) / val3
 End Function
 
 a = cDbl (Vault.ObjectPropertyOperations.GetProperty(ObjVer, vault.PropertyDefOperations.GetPropertyDefIDByAlias ("A")).TypedValue.DisplayValue)
@@ -72,16 +72,16 @@ Output = Round(result, 4) & " " & currencyType
 
 ```vba
 If Not IsDate(InvoiceDate) Then
-  Output = ""
+	Output = ""
 Else
-  If Not IsNumeric(PaymentTerms) Then
-    Output = ""
-  Else
-  	PaymentTerms = cDbl(PaymentTerms)
+	If Not IsNumeric(PaymentTerms) Then
+		Output = ""
+	Else
+		PaymentTerms = cDbl(PaymentTerms)
 
-  	DateFormat = FormatDateTime(InvoiceDate,2)
+		DateFormat = FormatDateTime(InvoiceDate,2)
 
-  	Output = DateAdd("d",PaymentTerms,DateFormat)
-  EndIf
+		Output = DateAdd("d",PaymentTerms,DateFormat)
+	EndIf
 End If
 ```
