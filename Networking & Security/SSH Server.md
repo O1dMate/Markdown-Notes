@@ -76,7 +76,7 @@ ssh-keygen -t ed25519
 Once you run the command you will have a private key `FILE_NAME` and a public key `FILE_NAME.pub`
 
 ### Add the Public Key to Server's Authorized Keys
-If the following directory `.ssh` and file `authorized_keys` isn't already created, create it:
+If the directory `~/.ssh` and file `authorized_keys` isn't already created, create it:
 ```bash
 cd ~
 mkdir .ssh
@@ -97,8 +97,8 @@ You can use `localhost` as the IP address to test the key.
 ssh -i PRIVATE_KEY_FILE USER@IP
 ```
 
-`-i` means the location of the private key file.  
-`-p` means the port (22 is default).  
+`-i` is the location of the private key file.  
+`-p` is the port (22 is default).  
 
 
 

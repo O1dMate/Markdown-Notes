@@ -76,8 +76,10 @@ Let's say that you want your friend to RDP to your computer. However, you're bot
 
 You can perform a remote port forward to a remote host and expose your RDP listener (0.0.0.0:3389 by default) to the internet. 
 
-The goal is to setup a listener on the remote host on `0.0.0.0:3389`. However, when we do an SSH Port Forward, the default listener is on `localhost`. To change this and allow it to listen on all interfaces, we need to enabled the `GatewayPorts` options on the SSH Server.
+### Gateway Ports
+The goal is to setup a listener on the remote host on `0.0.0.0:3389`. However, when we do an SSH Port Forward, the default listener is on `127.0.0.1`. To change this and allow it to listen on all interfaces, we need to enabled the `GatewayPorts` options on the SSH Server.
 
+<br>
 
 **On your computer:**
 

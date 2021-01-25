@@ -1,4 +1,4 @@
-# Generating Certs
+# Certificate Generation
 
 <br>
 

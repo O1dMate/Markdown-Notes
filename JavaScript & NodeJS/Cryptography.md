@@ -28,7 +28,7 @@ console.log(`Decrypted: \t${decrypted.toString('utf-8')}\n`);
 ```
 
 
-### Hashing
+### Hashing Strings
 ```javascript
 const crypto = require('crypto');
 
