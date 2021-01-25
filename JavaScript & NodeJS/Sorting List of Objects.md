@@ -1,4 +1,4 @@
-# Sorting
+# Sorting List of Objects
 
 ### Sort a list of Objects by a Certain Key
 ```javascript

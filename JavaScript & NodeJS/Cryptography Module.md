@@ -1,6 +1,6 @@
 # JavaScript Crypto Module
 
-### Symmetric Encryption (AES-256 Counter-Mode)
+## Symmetric Encryption (AES-256 Counter-Mode)
 ```javascript
 const crypto = require('crypto');
 
@@ -27,8 +27,9 @@ console.log(`Decrypted: \t${decrypted.toString('hex')}`);
 console.log(`Decrypted: \t${decrypted.toString('utf-8')}\n`);
 ```
 
+<br>
 
-### Hashing Strings
+## Hashing Strings
 ```javascript
 const crypto = require('crypto');
 
@@ -57,8 +58,37 @@ console.log('SHA256:\t\t', SHA256_HashFunction.digest('hex'));
 console.log('SHA3-256:\t', SHA3_256_HashFunction.digest('hex'));
 ```
 
+<br>
 
-### Elliptic Curve Diffie-Hellman
+## Hashing a File
+```javascript
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+// Target file that we what to calculate the hash of
+const targetFile = path.join(__dirname, 'math1.js');
+
+// Create Hash Function
+const hash = crypto.createHash('sha256');
+hash.setEncoding('hex');
+
+// Create a read stream with the target file
+const inputFileStream = fs.createReadStream(targetFile);
+
+// Hashing is complete
+inputFileStream.on('end', () => {
+	hash.end();
+	console.log(hash.read());
+});
+
+// Read the file contents and pipe it into the hash object
+inputFileStream.pipe(hash);
+```
+
+<br>
+
+## Elliptic Curve Diffie-Hellman
 ```javascript
 const crypto = require('crypto');
 
