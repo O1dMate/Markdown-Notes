@@ -2,7 +2,7 @@
 
 ## GET Request
 ```javascript
-await fetch('/home');
+fetch('/home');
 ```
 
 <br>
@@ -11,7 +11,7 @@ await fetch('/home');
 ```javascript
 let apiData = { username:'username', password:'password' };
 
-await fetch('/login', { 
+fetch('/login', { 
 	method:'POST',
 	headers: {
 		'Content-Type': 'application/json'
@@ -27,13 +27,13 @@ await fetch('/login', {
 // The current origin is "https://my-domain.com".
 
 // Cookies for "my-domain.com" will be sent in the request.
-await fetch('/home');
+fetch('/home');
 
 // Cookies for "testing.com" WILL NOT be sent in the request.
-await fetch('https://testing.com/home');
+fetch('https://testing.com/home');
 
 // Cookies for "testing.com" WILL be sent in the request.
-await fetch('https://testing.com/home', {
+fetch('https://testing.com/home', {
 	credentials: 'include'
 });
 ```
@@ -42,7 +42,7 @@ await fetch('https://testing.com/home', {
 
 ## Custom Headers
 ```javascript
-await fetch('/home', {
+fetch('/home', {
 	headers: {
 		'Custom-Header-1': 'My Custom Header 1',
 		'Custom-Header-2': 'My Custom Header 2',
