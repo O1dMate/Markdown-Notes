@@ -32,7 +32,7 @@ Boilerplate code for setting up and using Web Workers in the Browser:
 			if (action === 'console.log') {
 				console.log(...outputData);
 			} else if (action = 'randomNumber') {
-				console.log(\`Random Number Results from Worker ${workerId}:\`, outputData);
+				console.log(`Random Number Results from Worker ${workerId}:`, outputData);
 			}
 
 		}
@@ -81,7 +81,7 @@ const calculations = (inputData) => {
 self.onmessage = ({ data }) => {
 	let { workerId, action, inputData } = data;
 
-	printMessage(workerId, \`Worker (${workerId}) Received Message "${action}":\`, inputData);
+	printMessage(workerId, `Worker (${workerId}) Received Message "${action}":`, inputData);
 
 	if (action === 'randomNumber') {
 		let result = calculations(inputData);
