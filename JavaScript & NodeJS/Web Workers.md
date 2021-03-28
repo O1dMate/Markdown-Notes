@@ -1,4 +1,4 @@
-# HTTP Server - Express
+# Web Workers
 
 Boilerplate code for setting up and using Web Workers in the Browser:
 
