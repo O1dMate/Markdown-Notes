@@ -28,3 +28,4 @@ If you have issues, you should be able to find all the same information easily b
 #### Ignore this
 
 <http://swd.pw:8080/cleartext-test>
+<https://ec2-52-63-182-138.ap-southeast-2.compute.amazonaws.com/>
