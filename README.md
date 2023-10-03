@@ -23,3 +23,8 @@ If you find any of the information useful please help yourself.
 I'm don't guarantee that any of the commands will work or that they will be up to date.
 
 If you have issues, you should be able to find all the same information easily by searching the internet.
+
+
+#### Ignore this
+
+<http://swd.pw:8080/cleartext-test>
