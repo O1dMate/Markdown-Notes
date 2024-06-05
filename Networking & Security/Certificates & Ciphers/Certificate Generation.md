@@ -9,15 +9,31 @@
 openssl ecparam -list_curves
 ```
 
+ - `Note:` not all Elliptic Curves are supported by browsers. Make sure you Google whether a curve is supported before using it for a certificate.
+
+<br>
 
 ### Generate CA Private Key
 
+#### Elliptic Curve
 ```bash
 openssl ecparam -genkey -name secp384r1 -out ca.key
 ```
 
- - `Note:` not all Elliptic Curves are supported by browsers. Make sure you Google whether a curve is supported before using it for a certificate.
+#### RSA
+ - The following code will result in a 2048-bit RSA key being generated:
+```bash
+openssl genrsa -out ca.key
+```
 
+<br>
+
+ - The following code will result in a 4096-bit RSA key being generated:
+```bash
+openssl genrsa -out ca.key 4096
+```
+
+<br>
 
 ### Generate CA Certificate
 
@@ -79,14 +95,15 @@ prompt = no
 C   = AU
 ST  = Victoria
 L   = Melbourne
-O   = OldMateTech
-OU  = R&D
-CN  = host1.oldmate
+O   = My Company
+OU  = My Division
+CN  = testing.com
 [req_ext]
 subjectAltName = @alt_names
 [alt_names]
-DNS.1 = host1.oldmate
-DNS.2 = host2.oldmate
+DNS.1 = testing.com
+DNS.2 = dev.testing.com
+DNS.3 = *.domain.com
 ```
 
 Create a certificate using the private that we just generated. This certificate will then need to be signed by our CA. This is why it's called a Signing Request.

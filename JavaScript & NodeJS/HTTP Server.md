@@ -12,10 +12,13 @@ const server = require('http').Server(app);;
 
 const PORT = 80;
 
-// Input: POST Request Body and a List of Properties. Verify the JSON body has all of these properties.
-// Returns: TRUE is all properties are there, otherwise FALSE.
+/* Verify the JSON body has all of these properties.
+
+   Input: POST Request Body and a List of Properties.
+   Returns: TRUE is all properties are there, otherwise FALSE.
+*/
 const verifyPropertiesExists = (requestBody, propertyList) => {
-	return propertyList.map(property => requestBody.hasOwnProperty(property)).reduce((acum, cur) => acum && cur, true);
+	return propertyList.map(property => requestBody.hasOwnProperty(property)).every(result => result === true);
 }
 
 // Support JSON encoded POST request bodies
@@ -71,30 +74,35 @@ app.get('/query/:idOne/:idTwo?/:idThree?', (req, res) => {
 	res.status(406).send('OK');
 });
 
+	
+
+// Login API
 app.post('/login', (req, res) => {
-	// Ensure we received the right params in the JSON body
-	if (req.body && verifyPropertiesExists(req.body, ['username', 'password'])) {
-		// If req.body is empty, ensure that "Content-Type: application/json" is set as a request header.
-		
-		// Get the params from the request body
-		let username = (req.body.username || '').toString();
-		let password = (req.body.password || '').toString();
+	console.log(req.body); // { username: 'John123', password: 'Password_ThatShouldNotBeGuessed641'}
 
-		// Perform Authentication logic here
+	console.log(req.body.username); // 'John123'
+	console.log(req.body.password); // 'Password_ThatShouldNotBeGuessed641'
 
-		// Login was successful, set a Cookie in the response
-		res.cookie('MyCookie', 'abcdefghijklmnopqrstuvwxyz', {
+	let loginSuccessful = false;
+
+	if (req.body && req.body.username && req.body.password) {
+		// Insert Authentication logic here
+		loginSuccessful = true;
+	}
+
+	if (loginSuccessful) {
+		// Login Successful, set a Cookie in the response
+		res.cookie('auth-token', 'kln450x02sl5gusnh3mpu0s7ca2jfsaf8h', {
 			maxAge: 3600000, 	// Time in milliseconds: 3600000 = 1 Hour
-			domain: 'localhost',
-			path: '/',
-			secure: true,
 			httpOnly: true,
-			sameSite: 'strict'
+			sameSite: 'lax'
 		}).send({ success: true });
 	} else {
+		// Login Failed
 		res.send({ success: false });
 	}
 });
+
 
 // Dealing with other HTTP Methods
 app.get('/*', (_, res) => res.send({ success: false }));
